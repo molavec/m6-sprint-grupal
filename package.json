@@ -1,11 +1,10 @@
 {
   "name": "m6-sprint-grupal",
   "version": "1.0.0",
-  "description": "",
+  "description": "Gestión Carreras Fórmula 1",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
