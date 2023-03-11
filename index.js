@@ -1,6 +1,8 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
 
+const equiposObj = require('./data/equipos.json')
+
 const app = express();
 const port = 3000;
 
@@ -14,7 +16,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/resultados-form', (req, res) => {
-  res.render('resultados-form');
+  // res.send(equiposObj.equipos);
+  const equiposList = [];
+  equiposObj.equipos.forEach(equipo => {
+    equiposList.push({ piloto: equipo.piloto1, escuderia: equipo.escuderia });
+    equiposList.push({ piloto: equipo.piloto2, escuderia: equipo.escuderia });
+
+  });
+  res.send(equiposList);
+
+  // res.render('resultados-form');
 })
 
 app.get('/resultados-por-escuderia', (req, res) => {
