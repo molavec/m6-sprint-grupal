@@ -1,0 +1,19 @@
+{
+  "name": "m6-sprint-grupal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/molavec/m6-sprint-grupal.git"
+  },
+  "author": "Tere y Miguel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/molavec/m6-sprint-grupal/issues"
+  },
+  "homepage": "https://github.com/molavec/m6-sprint-grupal#readme"
+}
