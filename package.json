@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/molavec/m6-sprint-grupal#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"
