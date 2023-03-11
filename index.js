@@ -13,6 +13,18 @@ app.get('/', (req, res) => {
   res.render('home');
 })
 
+app.get('/resultados-form', (req, res) => {
+  res.render('resultados-form');
+})
+
+app.get('/resultados-por-escuderia', (req, res) => {
+  res.render('resultados-por-escuderia');
+})
+
+app.get('/resultados-por-abandono', (req, res) => {
+  res.render('resultados-por-abandono');
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
