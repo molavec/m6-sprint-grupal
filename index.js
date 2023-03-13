@@ -1,7 +1,9 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
 
-const equiposObj = require('./data/equipos.json')
+const equiposObj = require('./data/equipos.json');
+const carrerasObj =  require('./data/carreras.json')
+
 
 const app = express();
 const port = 3000;
@@ -12,8 +14,10 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 app.set('partials', './partials');
 
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('home', {carreras: carrerasObj.carreras });
 })
 
 app.get('/resultados-form', (req, res) => {

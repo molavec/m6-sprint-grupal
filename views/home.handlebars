@@ -9,6 +9,9 @@
       <th class="text-left">Lugar</th>
       <th class="text-left">Piloto</th>
       <th>Lugar</th>
+      {{#each carreras}}
+        <th> <img src="{{ this.bandera }}" alt="{{ this.pais }}" class="w-12" /> </th>
+      {{/each}}
     </tr>
     <tr>
       <td class="text-left">1</td>
