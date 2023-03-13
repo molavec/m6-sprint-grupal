@@ -1,5 +1,6 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
+const bodyparser = require("body-parser");
 
 const equiposObj = require('./data/equipos.json')
 
@@ -12,21 +13,27 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 app.set('partials', './partials');
 
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({
+  extended: true,
+}));
+
 app.get('/', (req, res) => {
   res.render('home');
 })
 
 app.get('/resultados-form', (req, res) => {
   // res.send(equiposObj.equipos);
-  const equiposList = [];
+  const pilotosList = [];
   equiposObj.equipos.forEach(equipo => {
-    equiposList.push({ piloto: equipo.piloto1, escuderia: equipo.escuderia });
-    equiposList.push({ piloto: equipo.piloto2, escuderia: equipo.escuderia });
+    pilotosList.push({ piloto: equipo.piloto1, escuderia: equipo.escuderia });
+    pilotosList.push({ piloto: equipo.piloto2, escuderia: equipo.escuderia });
 
   });
-  res.send(equiposList);
+  // res.send(pilotosList);
+  console.log(pilotosList)
+  res.render('resultados-form', {pilotos: pilotosList});
 
-  // res.render('resultados-form');
 })
 
 app.get('/resultados-por-escuderia', (req, res) => {
@@ -35,6 +42,11 @@ app.get('/resultados-por-escuderia', (req, res) => {
 
 app.get('/resultados-por-abandono', (req, res) => {
   res.render('resultados-por-abandono');
+})
+
+app.post('/registrar-resultado', (req, res) => {
+  console.log(req.body)
+  res.send('Formulario Enviado');
 })
 
 app.listen(port, () => {
