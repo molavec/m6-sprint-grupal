@@ -1,4 +1,5 @@
 const express = require('express');
+
 const { engine } = require('express-handlebars');
 const bodyparser = require('body-parser');
 
@@ -9,7 +10,7 @@ const queries = require('./lib/queries');
 const functions =  require('./lib/functions');
 
 
-queries.createDatabase();
+// queries.createDatabase();
 
 const app = express();
 const port = 3000;
@@ -38,8 +39,6 @@ app.use(bodyparser.urlencoded({
 }));
 
 app.get('/', (req, res) => {
-
-
   res.render('home', {
     carreras: carrerasObj.carreras, 
     puntajes: functions.resultadosPorPiloto(pilotosList, resultados, carrerasObj.carreras),
@@ -48,8 +47,10 @@ app.get('/', (req, res) => {
 
 app.get('/resultados-form', (req, res) => {
   // renderiza la informacion
-  res.render('resultados-form', { pilotos: pilotosList, carreras: carrerasObj.carreras });
-
+  res.render('resultados-form', { 
+    pilotos: pilotosList, 
+    carreras: carrerasObj.carreras 
+  });
 })
 
 app.get('/resultados-por-escuderia', (req, res) => {
@@ -64,10 +65,12 @@ app.get('/resultados-por-abandono', (req, res) => {
 })
 
 app.post('/registrar-resultado', (req, res) => {
-  
-
-  // elimina resultados del circuito actual en caso de actualizacion
-  const resultadosAux = resultados.filter( (resultado) => resultado.circuito_id !== req.body.circuito); 
+  // En caso de que existan resultados para el circutos
+  // se considera una que es una actualización 
+  // asi que elimina resultados del circuito actual
+  const resultadosAux = resultados.filter( 
+    (resultado) => resultado.circuito_id !== req.body.circuito
+  ); 
 
   // parse info
   for (let i=0; i < req.body.piloto.length; i++) {

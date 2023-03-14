@@ -3,9 +3,7 @@
 Sistema de gestión de resultador Formula 1.
 
 ## Requerimientos 
-
 * Mysql 
-
 
 ## How to
 

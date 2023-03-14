@@ -4,7 +4,8 @@
   "description": "Gestión Carreras Fórmula 1",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "pull": "git pull"
   },
   "repository": {
     "type": "git",
