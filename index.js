@@ -53,7 +53,10 @@ app.get('/resultados-form', (req, res) => {
 })
 
 app.get('/resultados-por-escuderia', (req, res) => {
-  res.render('resultados-por-escuderia');
+  res.render('resultados-escuderia', {
+    carreras: carrerasObj.carreras, 
+    puntajes: functions.resultadosPorEscuderia(equiposObj.equipos, resultados, carrerasObj.carreras),
+  });
 })
 
 app.get('/resultados-por-abandono', (req, res) => {
