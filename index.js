@@ -1,10 +1,14 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
-const bodyparser = require("body-parser");
+const bodyparser = require('body-parser');
 
 const equiposObj = require('./data/equipos.json');
 const carrerasObj =  require('./data/carreras.json')
 
+const queries = require('./lib/queries');
+
+console.log('BD > Verificando existencia de base de datos');
+queries.createDatabase();
 
 const app = express();
 const port = 3000;
