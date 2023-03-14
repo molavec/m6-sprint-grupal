@@ -68,7 +68,10 @@ app.get('/resultados-por-escuderia', (req, res) => {
 })
 
 app.get('/resultados-por-abandono', (req, res) => {
-  res.render('resultados-por-abandono');
+  res.render('resultados-por-abandono', {
+    carreras: carrerasObj.carreras, 
+    abandonos: functions.abandonosPorPiloto(pilotosList, resultados, carrerasObj.carreras),
+  });
 })
 
 app.post('/registrar-resultado', (req, res) => {
