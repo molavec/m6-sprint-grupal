@@ -8,16 +8,21 @@
     <tr class="border-stone-800 border-b-2">
       <th class="text-left">Lugar</th>
       <th class="text-left">Piloto</th>
-      <th>Lugar</th>
+      <th>Puntaje</th>
       {{#each carreras}}
         <th> <img src="{{ this.bandera }}" alt="{{ this.pais }}" class="w-12" /> </th>
       {{/each}}
     </tr>
-    <tr>
-      <td class="text-left">1</td>
-      <td class="text-left">Max Verstapen</td>
-      <td>25</td>
-    </tr>
+    {{#each puntajes}}
+      <tr>
+        <td class="text-left">{{this.lugar}}</td>
+        <td class="text-left">{{this.nombre}}</td>
+        <td>{{this.puntajeAcumulado}}</td>
+        {{#each this.puntajes}}
+          <td>{{this}}</td>
+        {{/each}}  
+      </tr>
+    {{/each}}
   </table>
 
   
