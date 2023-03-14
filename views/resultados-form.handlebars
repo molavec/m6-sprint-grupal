@@ -1,27 +1,44 @@
 {{>menu}}
 
-<div class="container">
+<div class="container mb-4">
 
   <p>Ingresar resultados de la Carrera</p>
 
   <form action="/registrar-resultado" method="post" > 
     
+
     {{#each pilotos}}
-    <div class="border-stone-800 border-2 m-y-4">
-      <input type="text" name="piloto" value="{{this.piloto}}">
-      <input type="text" name="escuderia" value="{{this.escuderia}}">
-      <input type="number" name="minutos totales">
-      <input type="number" name="lugar">
+    <div class="flex border-stone-800 border-t-2 m-y-4 py-2">      
+      <div class="flex flex-col mr-1">
+        <label for="" class="text-xs">piloto</label>
+        <input class="mb-2 border-stone-400 border-2" disabled type="text" name="piloto" value="{{this.piloto}}">
+      </div>
+      <div class="flex flex-col mr-1">
+        <label for="" class="text-xs">Escuderia</label>
+        <input class="mb-2 border-stone-400 border-2" disabled type="text" name="escuderia" value="{{this.escuderia}}">
+      </div>
+      <div class="flex flex-col mr-1">
+        <label for="" class="text-xs">Minutos en carrera</label>
+        <input class="mb-2 border-stone-400 border-2" type="number" name="minutos-totales" placeholder="Minutos totales">
+      </div>
+      <div class="flex flex-col mr-1">
+        <label for="" class="text-xs">Puesto</label>
+        <input class="mb-2 border-stone-400 border-2" type="number" name="lugar" placeholder="Puesto">
+      </div>
       
-      <select name="abandono" id="abandono">
-        <option value="NO"(defecto)>No</option>
-        <option value="problemas tecnicos">Problemas Técnicos</option>
-        <option value="problemas personales">Problemas Personales</option>
-      </select>
+      <div class="flex flex-col mr-1">
+        <label for="" class="text-xs">Abandono</label>
+        <select class="mb-2 border-stone-400 border-2" name="abandono" id="abandono">
+          <option value="NO"(defecto)>No</option>
+          <option value="problemas tecnicos">Problemas Técnicos</option>
+          <option value="problemas personales">Problemas Personales</option>
+        </select>
+      </div>
+
     </div>
     {{/each }}
 
-    <input type="submit" value="Enviar">
+    <input class="bg-blue-700 text-white p-2 min-w-40 rounded-2xl" type="submit" value="Enviar">
   </form> 
 
 </div>
