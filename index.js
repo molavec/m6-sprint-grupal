@@ -1,5 +1,8 @@
 const express = require('express');
 
+var fs = require('fs');
+
+
 const { engine } = require('express-handlebars');
 const bodyparser = require('body-parser');
 
@@ -15,9 +18,13 @@ const functions =  require('./lib/functions');
 const app = express();
 const port = 3000;
 
-// Parsea la información
-let resultados= [];
+// Lee los resultados almacenados en el archivo.
+const resultadosJSON= fs.readFileSync('./data/resultados.json',
+{encoding:'utf8', flag:'r'});;
+let resultados = JSON.parse(resultadosJSON);
+// console.log('resultados', resultados);
 
+// Parsea la información
 // res.send(equiposObj.equipos);
 const pilotosList = [];
 equiposObj.equipos.forEach(equipo => {
@@ -85,6 +92,12 @@ app.post('/registrar-resultado', (req, res) => {
   }
 
   resultados = resultadosAux;
+
+  // guarda los resultados en un archivo
+  fs.writeFile('./data/resultados.json', JSON.stringify(resultados), function (err) {
+    if (err) throw err;
+    console.log('Replaced!');
+  });
 
   res.send('Resultados Registrado <br> <a href="/">Volver</a>');
 })
