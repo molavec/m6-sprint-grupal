@@ -6,7 +6,7 @@ const bodyparser = require('body-parser');
 const equiposObj = require('./data/equipos.json');
 const carrerasObj =  require('./data/carreras.json');
 
-const queries = require('./lib/queries');
+//const queries = require('./lib/queries');
 const functions =  require('./lib/functions');
 
 
