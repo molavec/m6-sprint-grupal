@@ -55,6 +55,8 @@ app.get('/', (req, res) => {
   });
 })
 
+
+// >>>> MIDLEWARE: Formulario de resultados 
 app.get('/resultados-form', (req, res) => {
   // renderiza la informacion
   res.render('resultados-form', { 
@@ -77,6 +79,7 @@ app.get('/resultados-por-abandono', (req, res) => {
   });
 })
 
+// >>>> MIDLEWARE: Gestiona el submit del formulario
 app.post('/registrar-resultado', (req, res) => {
   // En caso de que existan resultados para el circutos
   // se considera una que es una actualización 
