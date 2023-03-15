@@ -1,29 +1,44 @@
+// >>>> IMPORTACION MODULOS
 const express = require('express');
-
 var fs = require('fs');
-
-
 const { engine } = require('express-handlebars');
 const bodyparser = require('body-parser');
 
+// >>>> IMPORTACION DE MODULOS LOCALES
 const equiposObj = require('./data/equipos.json');
 const carrerasObj =  require('./data/carreras.json');
-
 //const queries = require('./lib/queries');
 const functions =  require('./lib/functions');
 
-
 // queries.createDatabase();
 
+// >>>> CONFIGURACION DE EXPRESS
 const app = express();
 const port = 3000;
 
+// configura el engine de template para que funcione con express.
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+app.set('partials', './partials');
+
+// carpeta de archivos estaticos 
+app.use(express.static('public'));
+
+// formatea los datos recibidos del formulario
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({
+  extended: true,
+}));
+
+// >>>> EXTRAER DATOS DESDE EL ARCHIVO
 // Lee los resultados almacenados en el archivo.
 const resultadosJSON= fs.readFileSync('./data/resultados.json',
 {encoding:'utf8', flag:'r'});;
 let resultados = JSON.parse(resultadosJSON);
 // console.log('resultados', resultados);
 
+// >>>> REORDENA LOS DATOS DEL ARCHIVO PARA UTILIZARLOS EN EL PROGRAMA
 // Parsea la información
 // res.send(equiposObj.equipos);
 const pilotosList = [];
@@ -32,19 +47,7 @@ equiposObj.equipos.forEach(equipo => {
   pilotosList.push({ piloto: equipo.piloto2, escuderia: equipo.escuderia });
 });
 
-
-// configura el engine de template para que funcione con express.
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.set('views', './views');
-app.set('partials', './partials');
-
-app.use(express.static('public'));
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({
-  extended: true,
-}));
-
+// >>>> CONFIGURACIONES DE LOS 'MIDLEWARE'
 app.get('/', (req, res) => {
   res.render('home', {
     carreras: carrerasObj.carreras, 
@@ -93,7 +96,6 @@ app.post('/registrar-resultado', (req, res) => {
       abandono: req.body.abandono[i],
     });
   }
-
   resultados = resultadosAux;
 
   // guarda los resultados en un archivo
@@ -105,6 +107,7 @@ app.post('/registrar-resultado', (req, res) => {
   res.send('Resultados Registrado <br> <a href="/">Volver</a>');
 })
 
+// >>>> INICIA EL SERVIDOR WEB EXPRESS  
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
